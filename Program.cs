@@ -46,8 +46,14 @@ namespace HW01_Calc1
             }
             if (res.Count == 3)
             {
-                if (!(double.TryParse(res[0].ToString(), out num1))) num1 = Calc(SplitByOp(res[0].ToString()));
-                if (!(double.TryParse(res[2].ToString(), out num2))) num2 = Calc(SplitByOp(res[2].ToString()));
+                if (!(double.TryParse(res[0].ToString(), out num1)))
+                {
+                    num1 = Calc(SplitByOp(res[0].ToString()));
+                }
+                if (!(double.TryParse(res[2].ToString(), out num2)))
+                {
+                    num2 = Calc(SplitByOp(res[2].ToString()));
+                } 
                 return DoOp(num1, num2, res[1][0]);
             }
             int indMaxPrior = 1, MaxPrior = 0;
@@ -59,9 +65,9 @@ namespace HW01_Calc1
                     MaxPrior = Prior[res[i][0]];
                 }
             }
-            double n1 = Calc(res.GetRange(0, indMaxPrior));
-            double n2 = Calc(res.GetRange(indMaxPrior + 1, res.Count() - indMaxPrior - 1));
-            return DoOp(n1, n2, res[indMaxPrior][0]);
+            num1 = Calc(res.GetRange(0, indMaxPrior));
+            num2 = Calc(res.GetRange(indMaxPrior + 1, res.Count() - indMaxPrior - 1));
+            return DoOp(num1, num2, res[indMaxPrior][0]);
         }
 
         static double DoOp(double num1, double num2, char op)
