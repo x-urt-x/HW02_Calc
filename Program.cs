@@ -67,7 +67,24 @@ namespace HW01_Calc1
 
         static double DoOp(double num1, double num2, char op)
         {
-            return 1;
+            switch (op)
+            {
+                case '+': return num1 + num2;
+                case '-': return num1 - num2;
+                case '*': return num1 * num2;
+                case '/':
+                    if (num2 != 0)
+                    {
+                        return num1 / num2;
+                    }
+                    //throw new DivideByZeroException("DivByZero");
+                    Console.WriteLine("DivByZero");
+                    return 1;
+                default:
+                    //throw new Exception("InvalidOp");
+                    Console.WriteLine("InvalidOp");
+                    return 1;
+            }
         }
 
 
