@@ -40,7 +40,7 @@ namespace HW01_Calc1
                     }
                     else
                     {
-                        Console.WriteLine("InvalidInput");
+                        throw new Exception("InvalidInput");
                     }
                 }
             }
@@ -62,7 +62,6 @@ namespace HW01_Calc1
             double n1 = Calc(res.GetRange(0, indMaxPrior));
             double n2 = Calc(res.GetRange(indMaxPrior + 1, res.Count() - indMaxPrior - 1));
             return DoOp(n1, n2, res[indMaxPrior][0]);
- 
         }
 
         static double DoOp(double num1, double num2, char op)
@@ -77,32 +76,21 @@ namespace HW01_Calc1
                     {
                         return num1 / num2;
                     }
-                    //throw new DivideByZeroException("DivByZero");
-                    Console.WriteLine("DivByZero");
-                    return 1;
+                    throw new Exception("DevByZero");
                 default:
-                    //throw new Exception("InvalidOp");
-                    Console.WriteLine("InvalidOp");
-                    return 1;
+                    throw new Exception("InvalidOp");
             }
         }
 
-
-            static List<string> SplitByOp(string str)
+        static List<string> SplitByOp(string str)
         {
             List<string> res = new List<string> { };
             int j = 0, brCounter = str[0] == '(' ? 1 : 0;
 
-            if (Separators.Contains(str[0]) && !(str[0] == '-'))
-            {
- //             throw new Exception("NoFirstOp");
-                Console.WriteLine("NoFirstOp");
-            }
-            if (Separators.Contains(str[str.Length - 1]))
-            {
-//              throw new Exception("NoSecondOp");
-                Console.WriteLine("NoSecondOp");
-            }
+            if (Separators.Contains(str[0]) && !(str[0] == '-')) throw new Exception("NoFirstOp");
+
+            if (Separators.Contains(str[str.Length - 1])) throw new Exception("NoSecondOp");
+
             for (int i = 1; i < str.Length; i++)
             {
                 if (str[i] == '(') brCounter++;
@@ -119,20 +107,23 @@ namespace HW01_Calc1
             res.Add(str.Substring(j, str.Length - j).ToString());
             if (brCounter != 0)
             {
-       //         throw new Exception("BracketCountErr");
-                  Console.WriteLine("BracketCountErr");
+                throw new Exception("BracketCountErr");
             }
             return res;
         }
-
         static void Main(string[] args)
         {
             string input = Console.ReadLine();
             //string input = "(-(12,23/45+221-44/4)*(2*(21-8))+(56/8*-7/9))-98/(45*-3)";
             input = input.Replace(" ", "").Replace(".", ",");
-
-            Console.WriteLine(Calc(SplitByOp(input)));
-
+            try
+            {
+                Console.WriteLine(Calc(SplitByOp(input)));
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
         }
     }
 }
