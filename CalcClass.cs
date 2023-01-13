@@ -1,17 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace StringCalculatorNS
 {
 
-    class CalcException : Exception
+    public class CalcException : Exception
     {
         public CalcException(string message) : base(message) { }
     }
-    class StringCalculator
+    public class StringCalculator
     {
         readonly char[] Separators = new char[] { '+', '-', '/', '*' };
         readonly Dictionary<char, int> Prior = new Dictionary<char, int>()

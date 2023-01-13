@@ -7,7 +7,7 @@ using StringCalculatorNS;
 
 namespace UINS
 {
-    class UserInterface
+    public class UserInterface
     {
         public void RunProgramm()
         {
